@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;
+           charset=utf-8" />
+    <title>The History of a Software Engineer</title>
+
+    <style type="text/css">
+    body {
+        text-align: center;
+    }
+    #novelDiv {
+        width: 800px;
+        height: 450px;
+        border: 1px solid black;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        text-align: center;
+    }
+
+    #dialogDiv {
+        font-family: "Deja Vu Sans", Helvetica, Arial, sans-serif;
+        font-size: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 790px;
+        height: 141px;
+        border: 1px solid black;
+        border-top: none;
+        background-color: #3d372c;
+        color: white;
+        top: 450px;
+        left: 0;
+        padding: 5px;
+        text-align: left;
+    }   
+
+    .menuItem {
+        width: 75%;
+        margin: 0.5em auto;
+        padding: 0.5em 3em;
+        background-color: #0050a0;
+        -moz-border-radius: 15px;
+        border-radius: 15px;
+        text-align: center;
+        color: white;
+        font-family: "Deja Vu Sans", Helvetica, Arial, sans-serif;
+        font-size: 18px;
+    }
+
+    div.menuItem:hover {
+        background-color: #00a0ff;
+    }
+    </style>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="JS/jquery.min.js"></script>
+    <script type="text/javascript" src="JS/js-vine.js"></script>
+    <script type="text/javascript">
+
+    var nome;
+    var curso;
+    var email;
+    var codigo_prof;
+
+    // <![CDATA[
+    imgPath = "img/";
+    var preload = [
+        "chefe.png", "chefe_feliz.png", "chefe_feliz2.png",
+        "chefe_nervoso.png", "cliente.png", "cliente_feliz.png",
+        "personagem.png", "personagem_nervoso.png", "personagem_pensando.png",
+        "personagem_sorrindo.png", "wheat.png"
+    ];
+
+    var preloadObj = new Array(preload.length);
+    for (var i = 0; i < preload.length; i++)
+    {
+        preloadObj[i] = new Image();
+        preloadObj[i].src = imgPath + preload[i];
+    }
+
+    var personagem;
+    var chefe;
+    var cliente;
+    var narrator;
+    var leftSide;
+    var rightSide;
+    var upperCenter;
+    var pontos_requisitos = 10,pontos_projeto = 20, pontos_implementacao = 30,pontos_teste = 40,pontos_manutencao = 50 ;
+    var p;
+
+    function prepareNovel()
+    {
+        novel.imagePath = "img/";
+        novel.audioPath = "music/"; // path to your audio directory
+    	
+        personagem = new Character("Axl", {color: "rgb(255, 4, 0)"});
+        chefe = new Character("Mr. Takonada", {color: "rgb(10, 4, 230)"});
+        cliente = new Character("Zizou", {color: "rgb(0, 255, 255)"});
+    	narrator = new Character('');
+        leftSide = new Position(0, 1, 0, 1);
+        rightSide = new Position(800, 450, 1, 1);
+        upperCenter = new Position(0.5, 1, 0.5, 1);
+        rightTop = new Position(0.9, 0.1, 1, 0);
+
+        script = [ 
+
+    		label, "start",
+            /*ifStatement, "'parte2' == p ",
+                jump, "parte2",
+            elsePart, "'parte3' == p ",
+                jump, "parte3",
+            endIf, "",*/
+    		scene, "wheat.png",
+            chefe, {image: "chefe.png", position:leftSide},
+            chefe, "Axl, fechamos o contrato de um projeto grande!",
+            chefe, " Eu quero que você comande o desenvolvimento dele!",
+            personagem, {image: "personagem_sorrindo.png", position:rightSide},
+            personagem, "Sim, Mr. Takonada, farei o meu melhor para que ocorra tudo bem!",
+            cliente, {image:"cliente.png", position:upperCenter},
+            personagem, {image: "personagem.png", position:rightSide},
+            chefe, "Axl esse e o Mr. Zizou!",
+            personagem, "Olá Mr.Zizou, eu sou o Engenheiro Axl e comandarei o desenvolvimento do seu projeto.",
+            cliente, "Prazer em conhece-lô, creio que meu projeto estará em boas mãos!",
+            jump, "parte2",
+
+            label, "parte2",
+            jsCall, {fcn:saveStatus, params:['parte2']},
+            scene, "wheat.png",
+            chefe, {image: "chefe.png", position:leftSide},
+            chefe, "Axl, fechamos o contrato de um projeto grande!",
+
+            label, "parte3",
+            jsCall, {fcn:saveStatus, params:['parte3']},
+            scene, "wheat.png",
+             personagem, {image: "personagem_sorrindo.png", position:rightSide},
+            personagem, "parte3",
+            jsCall, {fcn:savePontos, params:[]},
+            jsCall, {fcn:saveSpreed, params:[]}
+
+        ];
+    }
+
+    function saveStatus(parte){
+        localStorage.setItem("parte",parte);
+    }
+
+    function savePontos(){
+        //funcao para salvar usando HTML5 LocalStorage
+         localStorage.setItem("pontos",[pontos_requisitos,pontos_projeto,pontos_implementacao,pontos_teste,pontos_manutencao]);
+    }
+
+    function loadData(){
+        p = localStorage.getItem("parte");
+        console.log(p);
+    }
+
+    function enviar(){
+        nome = document.getElementById("txtnome").value;
+        curso = document.getElementById("cbcurso").value;
+        email = document.getElementById("txtemail").value;
+        codigo_prof = document.getElementById("txtcodprof").value;
+
+        localStorage.setItem("nome",nome);
+        localStorage.setItem("curso",curso);
+        localStorage.setItem("email",email);
+        localStorage.setItem("codprof",codigo_prof);
+        
+        alert("Vai começar");
+        initNovel(800, 450);
+    }
+
+    function saveSpreed(){
+
+        $.ajax({
+                    url: "https://docs.google.com/forms/d/1T5-Uf-BuauI0Nsdf6di3ysD-RV0cUZ9kAvwivomCZKc/formResponse",
+                    data: { "entry.199778964": nome,
+                    "entry.2099589144": email,
+                    "entry.1015345309": codigo_prof,
+                    "entry.164103436": curso,
+                    "entry.507279025":  pontos_requisitos,
+                    "entry.1773465728": pontos_projeto,
+                    "entry.729279065": pontos_implementacao,
+                    "entry.496732154": pontos_teste,
+                    "entry.1765170312": pontos_manutencao,
+                    "entry.230375794": "nada"
+                     },
+                    type: "POST",
+                    statusCode: {
+                        0: function () {
+                            alert("Fim de Jogo!");
+                            window.location.replace("GraficoDesempenho.html");
+                        },
+                        200: function () {
+                            window.location.replace("GraficoDesempenho.html");
+                        }
+                    }
+                });
+    }
+
+   $(document).ready(function(){
+      $("#cadaAluno").submit(function(){
+        return false; 
+      });
+
+       $("#btnenviar").click(function(){
+        enviar();
+      });
+    });
+
+    // ]]>
+    </script>
+</head>
+<body onload="loadData();" onUnload="saveData();" style="background-color:#C4C0C3">
+    <script src="js/bootstrap.min.js"></script><br><br>
+    <div class"container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" padding: 5px; background-color:#2B2A2B">
+                    <form class="navbar-form" id="cadaAluno">
+                        <div class="form-group">
+                            <input type="text" name="nome" id="txtnome" class="form-control" placeholder="Nome" >
+                            <input type="text" name="email" id="txtemail" class="form-control" placeholder="Email">
+                            <input type="text" name="nome" id="txtcodprof" class="form-control" placeholder="Código Professor">
+                            <select id="cbcurso" class="form-control">
+                                <option value="ADS">Análise e desenvolvimento de sistemas</option>
+                                <option value="BD">Banco de dados</option>
+                            </select>
+                        </div>
+                        <button  class="btn btn-default" type="submit" style="width:8%" id="btnenviar">Iniciar</button>
+                    </form>
+                </nav>
+            </div><br><br>
+        </div>
+    </div><br><br>
+    <div id="debug"></div>
+    <div id="novelDiv">
+        <div style="position: absolute; left:0; top: 0; z-index:-1">
+            <img id="background0" src="img/abertura.jpg"/>
+        </div>
+        <div style="position: absolute; left:0; top: 0; z-index:-1">
+            <img id="background1" src="img/abertura.jpg"/>
+        </div>
+    </div>
+    <div id="dialogDiv"></div>
+    <br><br><br>
+</body>
+</html>

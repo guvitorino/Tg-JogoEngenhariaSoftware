@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Envia email</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="JS/jquery.min.js"></script>
+
+  </head>
+  <body>
+    <script src="js/bootstrap.min.js"></script>
+
+    <div class="container-fluid">
+		
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-8" style="border: solid 2px black; padding:50px; border-radius:10px;">
+						<form role="form" action="https://script.google.com/macros/s/AKfycbzwUDD5E5d3cI7KPEQ3ElN-8W9D83vOdNdpPzFmFUQNKQ56S-0/exec" method="get">
+							<div class="form-group">
+								 
+								<label for="nome">
+									Assunto
+								</label>
+								<input type="name" class="form-control" id="ass" name="ass" />
+							</div>
+							<div class="form-group">
+								 
+								<label for="email">
+									Email
+								</label>
+								<input type="email" class="form-control" id="email" name="email"/>
+							</div>
+							<div class="form-group">
+								<label for="codigoacesso">
+									Mensagem
+								</label>
+								<input type="text" class="form-control" id="msg" name="msg"/>
+							</div>
+							
+							<button type="submit" class="btn btn-info">
+								enviar
+							</button>
+						</form>
+					</div>
+					<div class="col-md-2">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  </body>
+</html>

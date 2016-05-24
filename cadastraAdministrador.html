@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cadastrar Professor</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="JS/jquery.min.js"></script>
+    <script type="text/javascript" src="JS/script.js"></script>
+    <script type="text/javascript">
+    	function saveSpreed(){
+    		var nome = document.getElementById("nome").value;
+        	var senha = document.getElementById("senha").value;
+        	var email = document.getElementById("email").value;
+	        $.ajax({
+	             	url: "https://docs.google.com/forms/d/1KTXFYJvspBl2Qo29Bin77B10NMp8ox1bM_6icZpCnCI/formResponse",
+                   	data: { "entry.1022831592": nome,
+               				"entry.913706276": senha,
+               				"entry.567423293": email
+	                },
+
+                    type: "POST",
+                    statusCode: {
+                        0: function () {
+                            alert("Cadastro Realizado Com Sucesso");
+                            window.location.replace("login.html");
+                        },
+                        200: function () {
+                            window.location.replace("login.html");
+                        }
+                    }
+	         });
+   		 }
+
+   		 $(document).ready(function(){
+	   		  $("#btnenviar").click(function(){
+		        saveSpreed();
+		      });
+		  });
+    </script>
+
+
+  </head>
+  <body>
+    <script src="js/bootstrap.min.js"></script>
+
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" padding: 5px; background-color:#2B2A2B">
+					<div class="navbar-header">
+						 
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+						</button> <a class="navbar-brand" href="administrador.html" id="mlin">Admin</a>
+					</div>
+					
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="cadastraAdministrador.html" id="mlin">Cadastrar-se</a>
+							</li>
+						</ul>
+					</div>
+					
+				</nav>
+			</div>
+		</div><br><br><br><br><br><br>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-2">
+					</div>
+					<div class="col-md-8" style="border: solid 2px black; padding:50px; border-radius:10px;">
+						<form role="form" id="formcod">
+							<div class="form-group">
+								 
+								<label for="nome">
+									Nome
+								</label>
+								<input type="name" class="form-control" id="nome" />
+							</div>
+							<div class="form-group">
+								 
+								<label for="email">
+									Email
+								</label>
+								<input type="email" class="form-control" id="email" />
+							</div>
+							<div class="form-group">
+								<label for="senha">
+									Senha
+								</label>
+								<input type="password" class="form-control" id="senha" />
+							</div>
+							
+							<button class="btn btn-info" id="btnenviar">
+								Cadastrar
+							</button>
+						</form>
+					</div>
+					<div class="col-md-2">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  </body>
+</html>

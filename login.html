@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Login para professores</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <script type="text/javascript" src="JS/csv-to-json.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript">
+			var ajson;
+			var obj;
+			function carrega(){
+			  var url = "https://docs.google.com/spreadsheets/d/1BdkqwhIfBDxUfhkB5redkxW2nIeFy58shUzlxo8zJtM/pub?output=csv";
+			  $.ajax({
+			    type: "GET",
+			    url: url,
+			    success: function(data){
+			    	ajson = csvJSON(data);
+			    	obj = JSON.parse(ajson);
+			    }
+			  });
+			}
+
+			function login(){
+				var email = document.getElementById("txtemail").value;
+				var senha = document.getElementById("txtsenha").value;
+				for (var i = 0; i < obj.length; i++) {
+				 	if(obj[i].email == email){
+				 		if(obj[i].chave_acesso == senha){
+				 			document.cookie = "adm="+obj[i].email+"; expires=Thu, 18 Dec 2099 12:00:00 UTC";
+				 			window.location.replace("administrador.html");
+				 		}
+				 		else{
+				 			$('#msgerro').show();
+				 		}
+				 	}else{
+				 		$('#msgerro').show();
+				 	}
+				}
+			}
+
+			$(document).ready(function(){
+				carrega();
+	   		  $("#btnentrar").click(function(){
+		        login();
+		      });
+		  });
+
+	</script>
+  </head>
+  <body>
+
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" padding: 5px; background-color:#2B2A2B">
+					<div class="navbar-header">
+						 
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+						</button> <a class="navbar-brand" href="#" id="mlin">Admin</a>
+					</div>
+					
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="cadastraAdministrador.html" id="mlin">Cadastrar-se</a>
+							</li>
+						</ul>
+					</div>
+					
+				</nav>
+			</div>
+		</div><br><br><br><br><br><br><br>
+		<div class="row">
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-4" style="background:black; padding:80px;color:white; border-radius:10px">
+				<form role="form"  id="formcod">
+					<div class="form-group">
+						 
+						<label for="txtemail">
+							Email
+						</label>
+						<input type="email" class="form-control" id="txtemail">
+					</div>
+					<div class="form-group">
+						 
+						<label for="txtsenha">
+							Senha
+						</label>
+						<input type="password" class="form-control" id="txtsenha">
+					</div><br>
+					<div>
+						<div class="alert alert-danger"  style="padding:10px; font-size:20px; display:none" id="msgerro">Email ou Senha incorretos! </div>
+						<center>
+							<button type="submit" class="btn btn-default" style="background-color:#2B2A2B; color:white;" id="btnentrar">
+								Entrar
+							</button>
+						</center>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-4">
+			</div>
+		</div>
+	</div>
+
+    
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

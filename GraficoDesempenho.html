@@ -1,0 +1,45 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title> Gráfico de Desempenho</title>
+	<script type="text/javascript" src="JS/Chart.js"></script>
+	<script type="text/javascript" src="JS/jquery.min.js"></script>
+</head>
+
+<body onload="getNome();">
+	<center>
+	<h1><script type="text/javascript">var nome = localStorage.getItem("nome");$('h1').empty().append(nome);console.log(nome);</script></h1>
+	<canvas id="radarChart" width="400" height="350"></canvas>
+	</center>
+	<script type="text/javascript">
+			var pontos = localStorage.getItem("pontos");
+			var lista = pontos.split(",");
+			var radarData = {
+				labels : ["Requisitos","Projeto","Implementação","Teste","Manutenção"],
+				datasets : [
+					
+					{
+				    	fillColor: "rgba(63,169,245,.1)",
+			      		strokeColor: "rgba(63,169,245,1)",
+						pointColor : "rgba(151,187,255,1)",
+						pointStrokeColor : "#fff",
+						data : lista
+					}
+				]
+			}
+
+			//Chart
+			var ctx2 = document.getElementById("radarChart").getContext("2d");
+			var myNewChart = new Chart(ctx2).Radar(radarData);
+
+			new Chart(ctx2).Radar(radarData,options);
+	</script>
+    <div style="text-align:center; margin-top: 0.5em;">
+	<button onclick="reiniciarJogo()">Reniciar Jogo</button></div>
+	<script type="text/javascript">
+		function reiniciarJogo(){
+			window.location.replace("softwareengineer.html");
+		}
+	</script>
+</body>
+</html>

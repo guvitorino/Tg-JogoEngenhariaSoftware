@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<title>Administrador</title>
+	<style type="text/css">
+    	.coluna{
+    		width: 5%;
+    	}
+    </style>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<script type="text/javascript" src="JS/Chart.js"></script>
+	<script type="text/javascript" src="JS/jquery.min.js"></script>
+	<script type="text/javascript" src="JS/csv-to-json.js"></script>
+	<script type="text/javascript">
+			var ajson;
+			var obj;
+			$(function(){
+			  var url = "https://docs.google.com/spreadsheets/d/1s5dQ-TsNO2rVXLFLILhXqLywK_jbJqgT27b5U5VTuWo/pub?output=csv";
+			  $.ajax({
+			    type: "GET",
+			    url: url,
+			    success: function(data){
+			    	ajson = csvJSON(data);
+			    	obj = JSON.parse(ajson);
+			    }
+			  });
+			});
+
+			function carregaCombo(codigo){
+				var x = document.getElementById("cbaluno");
+				x.options.length = 0;
+				var option = document.createElement("option");
+				option.text = "";
+				x.add(option);
+				for (var i = 0; i < obj.length; i++) {
+					if(obj[i].Cod_Prof == codigo){
+						var option = document.createElement("option");
+						option.text = obj[i].Nome;
+						x.add(option);
+					}
+				}
+			}
+			function getIndex(nome){
+				for (var i = 0; i < obj.length; i++) {
+				 	if(obj[i].Nome = nome)
+				 		return i;
+				};
+				return -1;
+			}
+
+			function a(){
+			  link = document.getElementById("radarChart").toDataURL('image/jpeg', 0.9).split(',')[1];
+			  imgurUpload(link);
+			}
+
+			function selecionaAluno(){
+				var ele = document.getElementById("cbaluno").value;
+				var i = getIndex(ele);
+				if(i >= 0){
+					$('b').empty().append(obj[i].Curso);
+					$('#lreq').empty().append(obj[i].Pontos_Requisitos);
+					$('#lproj').empty().append(obj[i].Pontos_Projeto);
+					$('#limp').empty().append(obj[i].Pontos_Implementacao);
+					$('#lteste').empty().append(obj[i].Pontos_Teste);
+					$('#lmanut').empty().append(obj[i].Pontos_Manutencao);	
+					var lista =[];
+					lista.push(obj[i].Pontos_Requisitos);	
+					lista.push(obj[i].Pontos_Projeto);
+					lista.push(obj[i].Pontos_Implementacao);
+					lista.push(obj[i].Pontos_Teste);
+					lista.push(obj[i].Pontos_Manutencao);
+
+
+
+					var radarData = {
+					labels : ["Requisitos","Projeto","Implementação","Teste","Manutenção"],
+								datasets : [
+									
+									{
+								    	fillColor: "rgba(63,169,245,.1)",
+							      		strokeColor: "rgba(63,169,245,1)",
+										pointColor : "rgba(151,187,255,1)",
+										pointStrokeColor : "#fff",
+										data : lista
+									}
+								]
+							}
+					//Chart
+					var ctx2 = document.getElementById("radarChart").getContext("2d");
+					var myNewChart = new Chart(ctx2).Radar(radarData);
+					new Chart(ctx2).Radar(radarData,options);
+				}else{
+					$('b').empty();
+					$('#lreq').empty();
+					$('#lproj').empty();
+					$('#limp').empty();
+					$('#lteste').empty();
+					$('#lmanut').empty();
+				}
+			}
+ 
+
+			function imgurUpload(image) {
+					var clientId = "02cd6c28a7c0409";
+				    imagem = "/img/image.png";
+
+				  $.ajax({
+			        url: 'https://api.imgur.com/3/image',
+			        type: 'POST',
+			        headers: {
+			          // Your application gets an imgurClientId from Imgur
+			          Authorization: 'Client-ID ' + clientId
+			        },
+			        data: {
+			          // convert the image data to base64
+			          image:  image
+			        },
+			        success: function(result) {
+			           if(result.success) {
+				           // window.location = result.data.link;
+				            $("#linkimg").val(result.data.link);
+				        }
+			        },
+			        error: function(data){
+			        	console.log(JSON.stringify(data));
+			        }
+			      });
+			    
+			  }
+
+	</script>
+	<script type="text/javascript" src="JS/script.js"></script>
+</head>
+
+<body>
+	<script src="js/bootstrap.min.js"></script><br><br>
+	
+	<br><br><br><br><br>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+				<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" padding: 5px; background-color:#2B2A2B">
+					<div class="navbar-header">
+						 
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+							 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+						</button> <a class="navbar-brand" href="#" id="mlin">Admin</a>
+					</div>
+					
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="softwareengineer.html" id="mlin">Jogar</a>
+							</li>
+							<li>
+								<a href="cadastraAdministrador.html" id="mlin">Cadastrar-se</a>
+							</li>
+							<li>
+								<a id="mlin">Sair</a>
+							</li>
+						</ul>
+						<form class="navbar-form navbar-left" id="formcod">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Código de Acesso" id="txtcod"/>
+							</div> 
+							<button type="submit" class="btn btn-default" id="btnenvcod">
+								Buscar
+							</button>
+						</form>
+					</div>
+					
+				</nav>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6" style="border: solid 2px black; padding-bottom:49px">
+				<center><h3>Dados</h3></center>
+				<select class="form-control" id="cbaluno" onchange="selecionaAluno();">
+			    </select><br><br>
+			    Curso: <b id="curso"></b>
+				<table class="table table-bordered table-condensed">
+					<thead>
+						<tr>
+							<th class="coluna" style="border: 1px solid black; ">
+								Divisao
+							</th>
+							<th class="coluna" style="border: 1px solid black">
+								Notas
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="coluna">
+							<td>Requisitos</td>
+							<td id="lreq"></td>
+						</tr class="coluna">
+						<tr class="coluna">
+							<td>Projeto</td>
+							<td id="lproj"></td>
+						</tr>
+						<tr class="coluna">
+							<td>Implementação</td>
+							<td id="limp"></td>
+						</tr>
+						<tr class="coluna">
+							<td>Teste</td>
+							<td id="lteste"></td>
+						</tr>
+						<tr class="coluna">
+							<td >Manutenção</td>
+							<td id="lmanut"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6" style="border: solid 2px black; padding-bottom:49px">
+				<center><h3>Gráfico</h3>
+					<canvas id="radarChart" width="400" height="301"></canvas>
+				</center>
+			</div>
+		</div><br><br>
+		<div class="row" >
+				<div class="col-md-2">                   </div>
+				<div class="col-md-8" style="border:1px solid black; padding:10px">
+					
+						<div class="form-group">
+							<label for="txtcoment">
+								Comentario
+							</label>
+							<textarea name="comentarios" class="form-control" id="txtcoment" placeholder="Comente aqui... "></textarea> 
+							<input type="text" id="linkimg" style="">
+						</div>
+						<center><button type="submit" class="btn btn-success" onClick="a()">
+							Enviar
+						</button></center>
+				
+				</div>
+				<div class="col-md-2">&nbsp&nbsp</div>
+			</div>
+	</div><br><br>
+</body>
+</html>
