@@ -122,6 +122,7 @@
 			           if(result.success) {
 				           // window.location = result.data.link;
 				            $("#linkimg").val(result.data.link);
+				            enviarEmail();
 				        }
 			        },
 			        error: function(data){
@@ -130,6 +131,13 @@
 			      });
 			    
 			  }
+
+			function enviarEmail(){
+				var msg = document.getElementById("txtcoment").value;
+				var img = document.getElementById("linkimg").value;
+				var link = "https://script.google.com/macros/s/AKfycbzwUDD5E5d3cI7KPEQ3ElN-8W9D83vOdNdpPzFmFUQNKQ56S-0/exec?ass=ComentariosProfessor&email=gu_vitorino%40hotmail.com&msg="+msg+"&img="+img;
+				window.location.replace(link);
+			}
 
 	</script>
 	<script type="text/javascript" src="JS/script.js"></script>
@@ -231,7 +239,7 @@
 								Comentario
 							</label>
 							<textarea name="comentarios" class="form-control" id="txtcoment" placeholder="Comente aqui... "></textarea> 
-							<input type="text" id="linkimg" style="">
+							<input type="text" id="linkimg" style="display:none">
 						</div>
 						<center><button type="submit" class="btn btn-success" onClick="a()">
 							Enviar
