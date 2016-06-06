@@ -21,6 +21,7 @@
 			  var url = "https://docs.google.com/spreadsheets/d/1s5dQ-TsNO2rVXLFLILhXqLywK_jbJqgT27b5U5VTuWo/pub?output=csv";
 			  $.ajax({
 			    type: "GET",
+			    crossDomain: true,
 			    url: url,
 			    success: function(data){
 			    	ajson = csvJSON(data);
