@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;
            charset=utf-8" />
-    <title>The History of a Software Engineer</title>
+    <title>BeEngineer</title>
 
     <style type="text/css">
     body {
@@ -71,7 +71,8 @@
         "chefe.png", "chefe_feliz.png", "chefe_feliz2.png",
         "chefe_nervoso.png", "cliente.png", "cliente_feliz.png",
         "personagem.png", "personagem_nervoso.png", "personagem_pensando.png",
-        "personagem_sorrindo.png", "wheat.png"
+        "personagem_sorrindo.png", "wheat.png","escritorio.jpg","casodeuso.jpg",
+        "descricao_projeto.png", "requisitos_errado.png"
     ];
 
     var preloadObj = new Array(preload.length);
@@ -96,9 +97,10 @@
         novel.imagePath = "img/";
         novel.audioPath = "music/"; // path to your audio directory
     	
-        personagem = new Character("Axl", {color: "rgb(255, 4, 0)"});
-        chefe = new Character("Mr. Takonada", {color: "rgb(10, 4, 230)"});
-        cliente = new Character("Zizou", {color: "rgb(0, 255, 255)"});
+        personagem = new Character("Steven Gates", {color: "rgb(255, 4, 0)"});
+        chefe = new Character("Mark Jobs", {color: "rgb(10, 4, 230)"});
+        outro = new Character("Arnold Page", {color: "rgb(0, 255, 255)"});
+        photo = new Character("", {position: upperCenter});
     	narrator = new Character('');
         leftSide = new Position(0, 1, 0, 1);
         rightSide = new Position(800, 450, 1, 1);
@@ -113,48 +115,76 @@
             elsePart, "'parte3' == p ",
                 jump, "parte3",
             endIf, "",*/
-    		scene, "wheat.png",
+    		scene, "escritorio.jpg",
+            personagem, {image: "personagem_sorrindo.png", position:upperCenter},
+            narrator, "Você é um desenvolvedor que está em uma das mais novas Startups a Tortus, e será um dos responsáveis pelo desenvolvimento do sistema de uma Rotisseria, do mais novo cliente.",
+            
+            scene, "escritorio.jpg",
             chefe, {image: "chefe.png", position:leftSide},
-            chefe, "Axl, fechamos o contrato de um projeto grande!",
-            chefe, " Eu quero que você comande o desenvolvimento dele!",
-            personagem, {image: "personagem_sorrindo.png", position:rightSide},
-            personagem, "Sim, Mr. Takonada, farei o meu melhor para que ocorra tudo bem!",
-            cliente, {image:"cliente.png", position:upperCenter},
+            chefe, "Steven Gates você é o responsável pelo desenvolvimento do projeto e terá que cumprir com os prazos.",
             personagem, {image: "personagem.png", position:rightSide},
-            chefe, "Axl esse e o Mr. Zizou!",
-            personagem, "Olá Mr.Zizou, eu sou o Engenheiro Axl e comandarei o desenvolvimento do seu projeto.",
-            cliente, "Prazer em conhece-lô, creio que meu projeto estará em boas mãos!",
-            jump, "parte2",
+            personagem , "Okay!",
+            jump, "descricao_projeto",
 
-            label, "parte2",
-            jsCall, {fcn:saveStatus, params:['parte2']},
-            scene, "wheat.png",
-            chefe, {image: "chefe.png", position:leftSide},
-            chefe, "Axl, fechamos o contrato de um projeto grande!",
+            label,"descricao_projeto",
+            scene,"descricao_projeto.png",
+            narrator,"Análise a descrição, quando estiver certeza que pode continuar, continue",
+            jump,"pergunta1",
 
-            label, "parte3",
-            jsCall, {fcn:saveStatus, params:['parte3']},
-            scene, "wheat.png",
-             personagem, {image: "personagem_sorrindo.png", position:rightSide},
-            personagem, "parte3",
-            jsCall, {fcn:savePontos, params:[]},
-            jsCall, {fcn:saveSpreed, params:[]}
+            label, "pergunta1",
+            scene, "escritorio.jpg",
+            personagem, {image: "personagem.png", position:rightSide},
+            personagem , "Precisamos cumprir com os prazos, por isso vamos iniciar o levantamento de requisitos, temos que seguir a descrição do projeto.",
+            outro, {image: "cliente.png", position: leftSide},
+            outro, "Tudo bem, ja irei botar a mão na massa.",
+            scene,"escritorio.jpg",
+            narrator, "Após algum tempo, vocês terminaram o documento de requisitos, faltando apenas você revisar e validar para partir para o próximo passo do desenvolvimento",
+            scene, "requisitos_errado.png",
+            narrator,"Análise atentamente os requisitos.",
+            scene,"escritorio.jpg",
+            menu, [
+                "Os requisitos estão corretos? Se não quais das opções está correta?",
+                "Sim, os requisitos estão corretos", [ setVars, { resp: "resp1" },
+                    jump, "TesteUnitario"],
+                "Passar de 1 ao 4 de requisitos funcionais para nao funcionais", [ setVars, { resp: "resp2" },
+                    jump, "continuacao"],
+                "Passar de 1 ao 4 de requisitos funcionais para nao funcionais e 4 e 5 de não funcionais para funcionais", [ setVars, { resp: "resp3" },
+                    jump, "continuacao"],
+                "Passar de 5 e 6 de requisitos funcionais para nao funcionais e do 2 ao 5 de não funcionais para funcionais", [ setVars, { resp: "resp4" },
+                    jump, "continuacao"],     
+            ],
+
+            label, "continuacao",
+            
+
 
         ];
     }
 
-    function saveStatus(parte){
+    function salvaStatus(parte){
         localStorage.setItem("parte",parte);
     }
 
-    function savePontos(){
+    function salvaPontos(){
         //funcao para salvar usando HTML5 LocalStorage
          localStorage.setItem("pontos",[pontos_requisitos,pontos_projeto,pontos_implementacao,pontos_teste,pontos_manutencao]);
     }
 
-    function loadData(){
+    function carregaDados(){
         p = localStorage.getItem("parte");
-        console.log(p);
+       /* if (p) {
+            carregaDados2();
+        };*/
+    }
+
+    function carregaDados2(){
+        nome = localStorage.getItem("nome");
+        curso = localStorage.getItem("curso");
+        email = localStorage.getItem("email");
+        codprof = localStorage.getItem("codprof");
+        $("#cadastro").toggle();
+        alert("Vai começar");
+        initNovel(800, 450);
     }
 
     function enviar(){
@@ -172,32 +202,33 @@
         initNovel(800, 450);
     }
 
-    function saveSpreed(){
+
+    function salvaDados(){
 
         $.ajax({
-                    url: "https://docs.google.com/forms/d/1T5-Uf-BuauI0Nsdf6di3ysD-RV0cUZ9kAvwivomCZKc/formResponse",
-                    data: { "entry.199778964": nome,
-                    "entry.2099589144": email,
-                    "entry.1015345309": codigo_prof,
-                    "entry.164103436": curso,
-                    "entry.507279025":  pontos_requisitos,
-                    "entry.1773465728": pontos_projeto,
-                    "entry.729279065": pontos_implementacao,
-                    "entry.496732154": pontos_teste,
-                    "entry.1765170312": pontos_manutencao,
-                    "entry.230375794": "nada"
-                     },
-                    type: "POST",
-                    statusCode: {
-                        0: function () {
-                            alert("Fim de Jogo!");
-                            window.location.replace("GraficoDesempenho.html");
-                        },
-                        200: function () {
-                            window.location.replace("GraficoDesempenho.html");
-                        }
-                    }
-                });
+            url: "https://docs.google.com/forms/d/1T5-Uf-BuauI0Nsdf6di3ysD-RV0cUZ9kAvwivomCZKc/formResponse",
+            data: { "entry.199778964": nome,
+            "entry.2099589144": email,
+            "entry.1015345309": codigo_prof,
+            "entry.164103436": curso,
+            "entry.507279025":  pontos_requisitos,
+            "entry.1773465728": pontos_projeto,
+            "entry.729279065": pontos_implementacao,
+            "entry.496732154": pontos_teste,
+            "entry.1765170312": pontos_manutencao,
+            "entry.230375794": "nada"
+             },
+            type: "POST",
+            statusCode: {
+                0: function () {
+                    alert("Fim de Jogo!");
+                    window.location.replace("GraficoDesempenho.html");
+                },
+                200: function () {
+                    window.location.replace("GraficoDesempenho.html");
+                }
+            }
+        });
     }
 
    $(document).ready(function(){
@@ -207,18 +238,19 @@
 
        $("#btnenviar").click(function(){
         enviar();
+        $("#cadastro").toggle();
       });
     });
 
     // ]]>
     </script>
 </head>
-<body onload="loadData();" onUnload="saveData();" style="background-color:#C4C0C3">
+<body onload="carregaDados();" onUnload="saveData();" style="background-color:#C4C0C3">
     <script src="js/bootstrap.min.js"></script><br><br>
     <div class"container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" padding: 5px; background-color:#2B2A2B">
+                <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style=" padding: 5px; background-color:#2B2A2B" id="cadastro">
                     <form class="navbar-form" id="cadaAluno">
                         <div class="form-group">
                             <input type="text" name="nome" id="txtnome" class="form-control" placeholder="Nome" >
@@ -238,10 +270,10 @@
     <div id="debug"></div>
     <div id="novelDiv">
         <div style="position: absolute; left:0; top: 0; z-index:-1">
-            <img id="background0" src="img/abertura.jpg"/>
+            <img id="background0" src="img/abertura2.jpg"/>
         </div>
         <div style="position: absolute; left:0; top: 0; z-index:-1">
-            <img id="background1" src="img/abertura.jpg"/>
+            <img id="background1" src="img/abertura2.jpg"/>
         </div>
     </div>
     <div id="dialogDiv"></div>
