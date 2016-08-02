@@ -72,7 +72,9 @@
         "chefe_nervoso.png", "cliente.png", "cliente_feliz.png",
         "personagem.png", "personagem_nervoso.png", "personagem_pensando.png",
         "personagem_sorrindo.png", "wheat.png","escritorio.jpg","casodeuso.jpg",
-        "descricao_projeto.png", "requisitos_errado.png"
+        "descricao_projeto.png", "requisitos_errado.png", "casodeusocerto.jpg",
+        "casodeusoerrado1.jpg","casodeusoerrado2.jpg", "casodeusoerrado3.jpg",
+        "docescolha.png"
     ];
 
     var preloadObj = new Array(preload.length);
@@ -144,19 +146,81 @@
             scene,"escritorio.jpg",
             menu, [
                 "Os requisitos estão corretos? Se não quais das opções está correta?",
-                "Sim, os requisitos estão corretos", [ setVars, { resp: "resp1" },
-                    jump, "TesteUnitario"],
-                "Passar de 1 ao 4 de requisitos funcionais para nao funcionais", [ setVars, { resp: "resp2" },
-                    jump, "continuacao"],
-                "Passar de 1 ao 4 de requisitos funcionais para nao funcionais e 4 e 5 de não funcionais para funcionais", [ setVars, { resp: "resp3" },
-                    jump, "continuacao"],
-                "Passar de 5 e 6 de requisitos funcionais para nao funcionais e do 2 ao 5 de não funcionais para funcionais", [ setVars, { resp: "resp4" },
-                    jump, "continuacao"],     
+                "Sim, os requisitos estão corretos", [ setVars, { perg1: "resp1" },
+                    jump, "diagramaCasoDeUso"],
+                "Passar de 1 ao 4 de requisitos funcionais para nao funcionais", [ setVars, { perg1: "resp2" },
+                    jump, "diagramaCasoDeUso"],
+                "Passar de 1 ao 4 de requisitos funcionais para nao funcionais e 4 e 5 de não funcionais para funcionais", [ setVars, { perg1: "resp3" },
+                    jump, "diagramaCasoDeUso"],
+                "Passar de 5 e 6 de requisitos funcionais para nao funcionais e do 2 ao 5 de não funcionais para funcionais", [ setVars, { perg1: "resp4" },
+                    jump, "diagramaCasoDeUso"],     
             ],
 
-            label, "continuacao",
-            
+            label, "diagramaCasoDeUso",
+            scene, "escritorio.jpg",
+            personagem,{image: "personagem_sorrindo.png", position:rightSide},
+            outro,{image: "cliente.png", position: leftSide},
+            personagem, "Os requisitos estão certos, agora precisamos fazer a modelagem do Diagrama de Caso de Uso",
+            outro, "Tudo Bem, podemos começar agora a modelagem",
+            personagem, {image: "personagem.png", position: rightSide},
+            personagem, "Muito bem, vamos começar",
+            scene,{image: "escritorio.jpg", effect: "fade"},
+            narrator, "Horas depois...",
+            personagem, {image:"personagem_sorrindo.png", position: rightSide},
+            outro,{image:"cliente_feliz.png", position: leftSide},
+            personagem, "Nem percebi o tempo passar...",
+            outro, "Eu também, e veja só a bagunça que deixamos",
+            personagem, {image:"personagem.png", position: rightSide},
+            outro,{image:"cliente.png", position: leftSide},
+            personagem, "Pois bem, vamos separar os Diagramas e decidir ver qual está correto",
+            jump, "pergunta2",
 
+            label, "pergunta2",
+            scene,{image: "escritorio.jpg", effect: "dissolve"}, 
+            narrator,"A seguir você verá 4 diagrama em sequencia e cabe a você definir qual deles está correto para a continuação do desenvolvimento!",
+            scene, "casodeusoerrado1.jpg",
+            narrator, "Diagrama nº1. Análise bem e passe para o próximo",
+            scene, "casodeusoerrado3.jpg",
+            narrator, "Diagrama nº2. Análise bem e passe para o próximo",
+            scene, "casodeusocerto.jpg",
+            narrator, "Diagrama nº3. Análise bem e passe para o próximo",
+            scene, "casodeusoerrado2.jpg",
+            narrator, "Diagrama nº4. Análise bem.",
+            scene,"escritorio.jpg",
+            narrator, "Agora que você analisou todos os Diagramas, responda a pergunta.",
+            menu, [
+                "Com base no documento de Requisitos, qual é o Diagrama que esta correto?",
+                "Diagrama 1", [ setVars, { perg2: "resp1" },
+                    jump, "inicioDesenvolvimento"],
+                "Diagrama 2", [ setVars, { perg2: "resp2" },
+                    jump, "inicioDesenvolvimento"],
+                "Diagrama 3", [ setVars, { perg2: "resp3" },
+                    jump, "inicioDesenvolvimento"],
+                "Diagrama 4", [ setVars, { perg2: "resp4" },
+                    jump, "inicioDesenvolvimento"],     
+            ],
+
+            label, "inicioDesenvolvimento",
+            scene, "escritorio.jpg",
+            personagem, {image: "personagem.png", position:rightSide},
+            outro, {image: "cliente.png", position: leftSide},
+            personagem, "Estamos indo muito bem, o projeto está bem adiantado! Agora vamos começar o Desenvolvimento do Sistema.",
+            outro, "Quais Ferramentas usaremos para esse projeto? ",
+            personagem, {image: "personagem_pensando.png", position:rightSide},
+            personagem, "Acho melhor criar um documento com possíveis Ferramentas e Linguagens para o Desenvolvimento.",
+            personagem, {image: "personagem.png", position:rightSide},
+            personagem, "Crie este documento e disponibilize no sistema para que eu possa definir as ferramentas e a Linguagem",
+            outro, "Muito bem vou fazer uma listagem minha e passar para você definir",
+            jump, "pergunta3",
+
+            label, "pergunta3",
+            scene,{image: "escritorio.jpg", effect: "fade"},
+            narrator, "Depois de algum tempo, você recebeu o arquivo, agora cabe a você analisar e decidir quais ferramentas usar e qual Linguagem ",
+            scene,{image: "docescolha.png", effect: "dissolve"},
+            narrator, "Analise bem as ferramentas e Linguagens que cada um tem conhecimento e acham que deveria ser usada no projeto."
+
+
+            
 
         ];
     }
