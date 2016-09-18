@@ -73,7 +73,7 @@
         "personagem.png", "personagem_nervoso.png", "personagem_pensando.png",
         "personagem_sorrindo.png", "wheat.png","escritorio.jpg","casodeuso.jpg",
         "descricao_projeto.png", "requisitos_errado.png", "casodeusocerto.jpg",
-        "casodeusoerrado1.jpg","casodeusoerrado2.jpg", "casodeusoerrado3.jpg",
+        "casodeusoerrado1.png","casodeusoerrado2.png", "casodeusoerrado3.png",
         "docescolha.png"
     ];
 
@@ -159,7 +159,25 @@
             ],
 
             label, "diagramaCasoDeUso",
-            jsCall, {fcn:contabiliza, params:['perg1',"novel.userVar.perg1"]},
+
+            ifStatement, "novel.userVar.perg1 == 'resp1'",
+                jsCall, {fcn:contabiliza, params:[2,2,0,0,1]},            
+            endIf, "",
+
+
+            ifStatement, "novel.userVar.perg1 == 'resp2'",
+                jsCall, {fcn:contabiliza, params:[2,2,0,0,1]},            
+            endIf, "",
+
+
+            ifStatement, "novel.userVar.perg1 == 'resp3'",
+                jsCall, {fcn:contabiliza, params:[4,4,0,0,2]},            
+            endIf, "",
+
+            ifStatement, "novel.userVar.perg1 == 'resp4'",
+                jsCall, {fcn:contabiliza, params:[10,10,0,0,5]},            
+            endIf, "",
+
             jsCall, {fcn:salvaStatus, params:['diagramaCasoDeUso']},
             scene, "escritorio.jpg",
             personagem,{image: "personagem_sorrindo.png", position:rightSide},
@@ -183,13 +201,13 @@
             jsCall, {fcn:salvaStatus, params:['pergunta2']},
             scene,{image: "escritorio.jpg", effect: "dissolve"}, 
             narrator,"A seguir você verá 4 diagrama em sequencia e cabe a você definir qual deles está correto para a continuação do desenvolvimento!",
-            scene, "casodeusoerrado1.jpg",
+            scene, "casodeusoerrado1.png",
             narrator, "Diagrama nº1. Análise bem e passe para o próximo",
-            scene, "casodeusoerrado3.jpg",
+            scene, "casodeusoerrado3.png",
             narrator, "Diagrama nº2. Análise bem e passe para o próximo",
             scene, "casodeusocerto.jpg",
             narrator, "Diagrama nº3. Análise bem e passe para o próximo",
-            scene, "casodeusoerrado2.jpg",
+            scene, "casodeusoerrado2.png",
             narrator, "Diagrama nº4. Análise bem.",
             scene,"escritorio.jpg",
             narrator, "Agora que você analisou todos os Diagramas, responda a pergunta.",
@@ -206,6 +224,25 @@
             ],
 
             label, "inicioDesenvolvimento",
+
+            ifStatement, "novel.userVar.perg2 == 'resp1'",
+                jsCall, {fcn:contabiliza, params:[2,2,2,0,1]},            
+            endIf, "",
+
+
+            ifStatement, "novel.userVar.perg2 == 'resp2'",
+                jsCall, {fcn:contabiliza, params:[2,2,2,0,1]},            
+            endIf, "",
+
+
+            ifStatement, "novel.userVar.perg2 == 'resp3'",
+                jsCall, {fcn:contabiliza, params:[10,10,10,0,5]},            
+            endIf, "",
+
+            ifStatement, "novel.userVar.perg2 == 'resp4'",
+                jsCall, {fcn:contabiliza, params:[2,2,2,0,1]},            
+            endIf, "",
+
             jsCall, {fcn:salvaStatus, params:['inicioDesenvolvimento']},
             scene, "escritorio.jpg",
             personagem, {image: "personagem.png", position:rightSide},
@@ -220,6 +257,7 @@
             jump, "pergunta3",
 
             label, "pergunta3",
+
             jsCall, {fcn:salvaStatus, params:['pergunta3']},
             scene,{image: "escritorio.jpg", effect: "fade"},
             narrator, "Depois de algum tempo, você recebeu o arquivo, agora cabe a você analisar e decidir quais ferramentas usar e qual Linguagem ",
@@ -239,6 +277,25 @@
             ],
 
             label, "Desenvolvimento",
+
+            ifStatement, "novel.userVar.perg3 == 'resp1'",
+                jsCall, {fcn:contabiliza, params:[5,5,5,2,2]},            
+            endIf, "",
+
+
+            ifStatement, "novel.userVar.perg3 == 'resp2'",
+                jsCall, {fcn:contabiliza, params:[10,10,10,5,5]},            
+            endIf, "",
+
+
+            ifStatement, "novel.userVar.perg3 == 'resp3'",
+                jsCall, {fcn:contabiliza, params:[10,10,10,5,5]},            
+            endIf, "",
+
+            ifStatement, "novel.userVar.perg3 == 'resp4'",
+                jsCall, {fcn:contabiliza, params:[5,5,5,2,2]},            
+            endIf, "",
+
             jsCall, {fcn:salvaStatus, params:['Desenvolvimento']},
             scene, "escritorio.jpg",
             personagem, {image: "personagem.png", position:rightSide},
@@ -272,7 +329,25 @@
             ],
 
             label, "posteste",
-            jsCall, {fcn:contabiliza, params:['perg4',"novel.userVar.perg4"]},
+
+            ifStatement, "novel.userVar.perg4 == 'resp1'",
+                jsCall, {fcn:contabiliza, params:[0,5,5,10,2]},            
+            endIf, "",
+
+
+            ifStatement, "novel.userVar.perg4 == 'resp2'",
+                jsCall, {fcn:contabiliza, params:[0,2,2,5,1]},            
+            endIf, "",
+
+
+            ifStatement, "novel.userVar.perg4 == 'resp3'",
+                jsCall, {fcn:contabiliza, params:[0,5,5,10,5]},            
+            endIf, "",
+
+            ifStatement, "novel.userVar.perg4 == 'resp4'",
+                jsCall, {fcn:contabiliza, params:[0,5,5,10,5]},            
+            endIf, "",
+
             jsCall, {fcn:salvaStatus, params:['posteste']},
             scene, "escritorio.jpg",
             personagem, {image: "personagem.png", position:rightSide},
@@ -296,98 +371,14 @@
          localStorage.setItem("pontos",[pontos_requisitos,pontos_projeto,pontos_implementacao,pontos_teste,pontos_manutencao]);
     }
 
-    function contabiliza(perg, resp){
-        console.log(perg);
-        console.log(resp);
-        if(perg == "perg1"){
-            if(resp == "resp1"){
-                pontos_requisitos+= 2;
-                pontos_projeto+= 2;
-                pontos_manutencao+= 1;
-            }else if(resp == "resp2"){
-                pontos_requisitos+= 2;
-                pontos_projeto+= 2;
-                pontos_manutencao+= 1;
-            }else if(resp == "resp3"){
-                pontos_requisitos+= 4;
-                pontos_projeto+= 4;
-                pontos_manutencao+= 2;
-            }else if(resp == "resp4"){
-                pontos_requisitos+= 10;
-                pontos_projeto+= 10;
-                pontos_manutencao+= 5;
-            }
-        }else if(perg == "perg2"){
-            if(resp == "resp1"){
-                pontos_requisitos = 2;
-                pontos_projeto = 2;
-                pontos_implementacao = 2;
-                pontos_manutencao = 1;
-            }else if(resp == "resp2"){
-                pontos_requisitos = 2;
-                pontos_projeto = 2;
-                pontos_implementacao = 2;
-                pontos_manutencao = 1;
-            }else if(resp == "resp3"){
-                pontos_requisitos = 10;
-                pontos_projeto = 10;
-                pontos_implementacao = 10;
-                pontos_manutencao = 5;
-            }else if(resp == "resp4"){
-                pontos_requisitos = 2;
-                pontos_projeto = 2;
-                pontos_implementacao = 2;
-                pontos_manutencao = 1;
-            }
-        }else if(perg == "perg3"){
-            if(resp == "resp1"){
-                pontos_requisitos = 5;
-                pontos_projeto = 5;
-                pontos_implementacao = 5;
-                pontos_teste = 2;
-                pontos_manutencao = 2;
-            }else if(resp == "resp2"){
-                pontos_requisitos = 10;
-                pontos_projeto = 10;
-                pontos_implementacao = 10;
-                pontos_teste = 5;
-                pontos_manutencao = 5;
-            }else if(resp == "resp3"){
-                pontos_requisitos = 10;
-                pontos_projeto = 10;
-                pontos_implementacao = 10;
-                pontos_teste = 5;
-                pontos_manutencao = 5;
-            }else if(resp == "resp4"){
-                pontos_requisitos = 5;
-                pontos_projeto = 5;
-                pontos_implementacao = 5;
-                pontos_teste = 2;
-                pontos_manutencao = 2;
-            }
-        }else if(perg == "perg4"){
-            if(resp == "resp1"){
-                pontos_projeto = 5;
-                pontos_implementacao = 5;
-                pontos_teste = 10;
-                pontos_manutencao = 2;
-            }else if(resp == "resp2"){
-                pontos_projeto = 2;
-                pontos_implementacao = 2;
-                pontos_teste = 5;
-                pontos_manutencao = 1;
-            }else if(resp == "resp3"){
-                pontos_projeto = 5;
-                pontos_implementacao = 5;
-                pontos_teste = 10;
-                pontos_manutencao = 5;
-            }else if(resp == "resp4"){
-                pontos_projeto = 5;
-                pontos_implementacao = 5;
-                pontos_teste = 10;
-                pontos_manutencao = 5;
-            }
-        }
+    function contabiliza(pr,pp,pi,pt,pm){
+        pontos_requisitos+= pr;
+        pontos_projeto+= pp;
+        pontos_implementacao+= pi;
+        pontos_teste+= pt;
+        pontos_manutencao+= pm;
+
+        console.log(pontos_requisitos,pontos_projeto,pontos_implementacao,pontos_teste,pontos_manutencao);
     }
 
     function carregaDados(){

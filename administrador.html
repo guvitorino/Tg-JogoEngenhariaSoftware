@@ -21,13 +21,11 @@
 			  var url = "https://docs.google.com/spreadsheets/d/1s5dQ-TsNO2rVXLFLILhXqLywK_jbJqgT27b5U5VTuWo/pub?output=csv";
 			  $.ajax({
 			    type: "GET",
-			    contentType: "text/csv; charset=utf-8",
-			    crossDomain: true,
-			    dataType: 'jsonp',
 			    url: url,
 			    success: function(data){
 			    	ajson = csvJSON(data);
 			    	obj = JSON.parse(ajson);
+			    	console.log(data);
 			    }
 			  });
 			});
@@ -48,13 +46,13 @@
 			}
 			function getIndex(nome){
 				for (var i = 0; i < obj.length; i++) {
-				 	if(obj[i].Nome = nome)
+				 	if(obj[i].Nome == nome)
 				 		return i;
 				};
 				return -1;
 			}
 
-			function a(){
+			function ajustarLink(){
 			  link = document.getElementById("radarChart").toDataURL('image/jpeg', 0.9).split(',')[1];
 			  imgurUpload(link);
 			}
