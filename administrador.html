@@ -25,7 +25,7 @@
 			    success: function(data){
 			    	ajson = csvJSON(data);
 			    	obj = JSON.parse(ajson);
-			    	console.log(data);
+			    	//console.log(data);
 			    }
 			  });
 			});
@@ -140,6 +140,25 @@
 				window.location.replace(link);
 			}
 
+			function logado(){
+				var logado = localStorage.getItem("logado");
+			
+				if(logado != "true"){
+					alert("Voce não estão logado, você será redirecionado para a página de login");
+					window.location.replace("login.html");
+				}
+			}
+
+			$(document).ready(function(){
+				logado();
+		  	});
+
+		  	function sair(){
+		  		localStorage.clear();
+		  		window.location.href = "login.html";
+		  	}
+
+
 	</script>
 	<script type="text/javascript" src="JS/script.js"></script>
 </head>
@@ -156,19 +175,13 @@
 						 
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 							 <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
-						</button> <a class="navbar-brand" href="#" id="mlin">Admin</a>
+						</button> <a class="navbar-brand" href="#" id="mlin" name="adm"></a>
 					</div>
-					
+	
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
 							<li>
-								<a href="softwareengineer.html" id="mlin">Jogar</a>
-							</li>
-							<li>
-								<a href="cadastraAdministrador.html" id="mlin">Cadastrar-se</a>
-							</li>
-							<li>
-								<a id="mlin">Sair</a>
+								<a  href="#" onclick="sair()" id="mlin" name="sair">Sair</a>
 							</li>
 						</ul>
 						<form class="navbar-form navbar-left" id="formcod">

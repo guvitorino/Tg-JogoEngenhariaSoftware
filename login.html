@@ -32,7 +32,8 @@
 				for (var i = 0; i < obj.length; i++) {
 				 	if(obj[i].email == email){
 				 		if(obj[i].chave_acesso == senha){
-				 			document.cookie = "adm="+obj[i].email+"; expires=Thu, 18 Dec 2099 12:00:00 UTC";
+				 			localStorage.setItem("logado",true);
+				 			localStorage.setItem("adm",obj[i].email);
 				 			window.location.replace("administrador.html");
 				 		}
 				 		else{
@@ -49,7 +50,7 @@
 	   		  $("#btnentrar").click(function(){
 		        login();
 		      });
-		  });
+		  	});
 
 	</script>
   </head>
