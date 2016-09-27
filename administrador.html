@@ -18,9 +18,10 @@
 			var ajson;
 			var obj;
 			$(function(){
-			  var url = "https://docs.google.com/spreadsheets/d/1s5dQ-TsNO2rVXLFLILhXqLywK_jbJqgT27b5U5VTuWo/pub?output=csv";
+			  var url = "http://localhost:9000/api/getcsv";
 			  $.ajax({
 			    type: "GET",
+			    crossDomain: true,
 			    url: url,
 			    success: function(data){
 			    	ajson = csvJSON(data);
@@ -255,7 +256,7 @@
 							<textarea name="comentarios" class="form-control" id="txtcoment" placeholder="Comente aqui... "></textarea> 
 							<input type="text" id="linkimg" style="display:none">
 						</div>
-						<center><button type="submit" class="btn btn-success" onClick="a()">
+						<center><button type="submit" class="btn btn-success" onClick="ajustarLink()">
 							Enviar
 						</button></center>
 				

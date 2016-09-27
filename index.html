@@ -74,7 +74,7 @@
         "personagem_sorrindo.png", "wheat.png","escritorio.jpg","casodeuso.jpg",
         "descricao_projeto.png", "requisitos_errado.png", "casodeusocerto.jpg",
         "casodeusoerrado1.png","casodeusoerrado2.png", "casodeusoerrado3.png",
-        "docescolha.png"
+        "docescolha.png", "relatoriotestes.png"
     ];
 
     var preloadObj = new Array(preload.length);
@@ -112,11 +112,38 @@
         script = [ 
 
     		label, "start",
-            /*ifStatement, "'parte2' == p ",
-                jump, "parte2",
-            elsePart, "'parte3' == p ",
-                jump, "parte3",
-            endIf, "",*/
+
+            ifStatement, "'descricao_projeto' == p ",
+                jump, "descricao_projeto",
+            endIf, "",
+            ifStatement, "'salvaStatus' == p ",
+                jump, "salvaStatus",
+            endIf, "",
+            ifStatement, "'diagramaCasoDeUso' == p ",
+                jump, "diagramaCasoDeUso",
+            endIf, "",
+            ifStatement, "'pergunta2' == p ",
+                jump, "pergunta2",
+            endIf, "",
+            ifStatement, "'inicioDesenvolvimento' == p ",
+                jump, "inicioDesenvolvimento",
+            endIf, "",
+            ifStatement, "'pergunta3' == p ",
+                jump, "pergunta3",
+            endIf, "",
+            ifStatement, "'Desenvolvimento' == p ",
+                jump, "Desenvolvimento",
+            endIf, "",
+            ifStatement, "'pergunta4' == p ",
+                jump, "pergunta4",
+            endIf, "",
+             ifStatement, "'posteste' == p ",
+                jump, "posteste",
+            endIf, "",
+             ifStatement, "'pergunta5' == p ",
+                jump, "pergunta5",
+            endIf, "",
+            
     		scene, "escritorio.jpg",
             personagem, {image: "personagem_sorrindo.png", position:upperCenter},
             narrator, "Você é um desenvolvedor que está em uma das mais novas Startups a Tortus, e será um dos responsáveis pelo desenvolvimento do sistema de uma Rotisseria, do mais novo cliente.",
@@ -177,7 +204,7 @@
             ifStatement, "novel.userVar.perg1 == 'resp4'",
                 jsCall, {fcn:contabiliza, params:[10,10,0,0,5]},            
             endIf, "",
-
+            jsCall, {fcn:salvaPontos, params:[]},
             jsCall, {fcn:salvaStatus, params:['diagramaCasoDeUso']},
             scene, "escritorio.jpg",
             personagem,{image: "personagem_sorrindo.png", position:rightSide},
@@ -242,7 +269,7 @@
             ifStatement, "novel.userVar.perg2 == 'resp4'",
                 jsCall, {fcn:contabiliza, params:[2,2,2,0,1]},            
             endIf, "",
-
+            jsCall, {fcn:salvaPontos, params:[]},
             jsCall, {fcn:salvaStatus, params:['inicioDesenvolvimento']},
             scene, "escritorio.jpg",
             personagem, {image: "personagem.png", position:rightSide},
@@ -295,7 +322,7 @@
             ifStatement, "novel.userVar.perg3 == 'resp4'",
                 jsCall, {fcn:contabiliza, params:[5,5,5,2,2]},            
             endIf, "",
-
+            jsCall, {fcn:salvaPontos, params:[]},
             jsCall, {fcn:salvaStatus, params:['Desenvolvimento']},
             scene, "escritorio.jpg",
             personagem, {image: "personagem.png", position:rightSide},
@@ -306,10 +333,10 @@
             outro,{image:"cliente_feliz.png", position: leftSide},
             outro, "Muito bem.Já iree fazer os primeiros rascunhos.",
             scene,{image: "escritorio.jpg", effect: "dissolve"}, 
-            narrator, "Já faz alguns dias desde que o desenvolvimento começou, vocês estão preparando tudo para garantir que a versão alfa seja entregue a tempo.",
+            narrator, "Já faz alguns dias desde que o desenvolvimento começou, vocês estão preparando tudo para garantir que a primeira versão seja entregue a tempo.",
             personagem, {image: "personagem.png", position:rightSide},
             outro, {image: "cliente.png", position: leftSide},
-            personagem, "Muito bem, estamos quase pronto de terminar a versão alfa, mas antes precisamos realizar alguns testes",
+            personagem, "Muito bem, estamos quase pronto de terminar a primeira versão, mas antes precisamos realizar alguns testes",
             outro, "Preparei alguns casos de testes para usarmos, mas precisamos defenir qual melhor forma de realizar esses testes.",
             jump, "pergunta4",
 
@@ -347,16 +374,77 @@
             ifStatement, "novel.userVar.perg4 == 'resp4'",
                 jsCall, {fcn:contabiliza, params:[0,5,5,10,5]},            
             endIf, "",
-
+            jsCall, {fcn:salvaPontos, params:[]},
             jsCall, {fcn:salvaStatus, params:['posteste']},
             scene, "escritorio.jpg",
             personagem, {image: "personagem.png", position:rightSide},
+            chefe, {image: "chefe.png", position: leftSide},
+            personagem, "Muito bem estamos pronto para levar a versão beta para Testes ao nosso cliente",
+            chefe, "Muito bem, podem levar, e depois me traga os relatórios",
+            personagem, "Okay!",
+            scene,{image: "escritorio.jpg", effect: "fade"},
+            personagem, {image: "personagem.png", position: rightSide},
             outro, {image: "cliente.png", position: leftSide},
-            personagem, "Pronto nosso ambiente de desenvolvimento está pronto!",
-            outro, "Agora é hora do show",
-            personagem, "Enquanto você cria os layouts, eu irei iniciar o desenvolvimento das classes de controle da nossa base de dados",
-            outro,{image:"cliente_feliz.png", position: leftSide},
-            outro, "Muito bem.Já iree fazer os primeiros rascunhos.",
+            outro, "Espero que os testes ocorreram bem!",
+            personagem, "Logo saberemos, já recebi a notificação de que o cliente mandou o relatório",
+            outro, "Pois bem, vamos ver logo!",
+            personagem, "Sim.",
+            scene,{image: "escritorio.jpg", effect: "fade"},
+            personagem, {image: "personagem_pensando.png", position: rightSide},
+            outro, {image: "cliente.png", position: leftSide},
+            personagem, "Hummm... Deixe me ver",
+            personagem, {image: "personagem_nervoso.png", position: rightSide},
+            personagem, "Ele conseguiu achar alguns erros, pelo visto não fomos bons o suficiente para conseguir testar tudo...",
+            outro, "Mas como isso foi possivel?",
+            jump, "pergunta5", 
+
+            label, "pergunta5",
+            jsCall, {fcn:salvaStatus, params:['pergunta5']},
+            scene, "escritorio.jpg",
+            narrator, "O cliente encontrou alguns erros, agora cabe a vocês localizarem os erros e os corrigir",
+            narrator, " A Seguir veja o relatório recebido",
+            scene, "relatoriotestes.png",
+            narrator, "leia bem e siga para a pergunta final.",
+            scene,{image: "escritorio.jpg", effect: "dissolve"},
+            menu, [
+                "Com os problemas descritos pelo cliente, qual a melhor forma de corrigilos?",
+                "Executar as mesmas operações descritas pelo cliente, mas utilizando Debug para ajudar a encotrar o problema", [ setVars, { perg5: "resp1" },
+                    jump, "final"],
+                "Realizar uma nova bateria de testes unitarios em cima dos modulos citados pelo cliente", [ setVars, { perg5: "resp2" },
+                    jump, "final"],
+                "Utilizar Sistema de logs para indentificar possiveis problemas ", [ setVars, { perg5: "resp3" },
+                    jump, "final"],    
+            ],
+
+            label, "final",
+
+            ifStatement, "novel.userVar.perg5 == 'resp1'",
+                jsCall, {fcn:contabiliza, params:[0,10,10,10,10]},            
+            endIf, "",
+
+
+            ifStatement, "novel.userVar.perg5 == 'resp2'",
+                jsCall, {fcn:contabiliza, params:[0,5,5,10,5]},            
+            endIf, "",
+
+
+            ifStatement, "novel.userVar.perg5 == 'resp3'",
+                jsCall, {fcn:contabiliza, params:[0,5,5,5,5]},            
+            endIf, "",
+            jsCall, {fcn:salvaPontos, params:[]},
+            scene,{image: "escritorio.jpg", effect: "dissolve"},
+            personagem, {image: "personagem_sorrindo.png", position:rightSide},
+            chefe, {image: "chefe_feliz.png", position: leftSide},
+            outro, {image: "cliente_feliz.png", position: upperCenter},
+
+            personagem, "Após terminamos de resolver os problemas encontrados, hoje entregamos a primeira versão estável.",
+            outro, "Agora só ir melhorando nosso software, e daqui alguns anos estaremos cheios de clientes satisfeitos",
+            chefe, "Muito bem, vocês fizeram um ótimo trabalho, parábens Pessoal!",
+
+            scene,{image: "escritorio.jpg", effect: "fade"},
+            personagem, {image: "personagem.png", position:upperCenter},
+            personagem, "Acho que esse é fim de nosso jornada juntos, mais volte sempre para desenvolvermos juntos",
+            personagem, " Nós se vê por aí",
             jsCall, {fcn:salvaPontos, params:[]},
             jsCall, {fcn:salvaDados, params:[]}
         ];
@@ -377,8 +465,6 @@
         pontos_implementacao+= pi;
         pontos_teste+= pt;
         pontos_manutencao+= pm;
-
-        console.log(pontos_requisitos,pontos_projeto,pontos_implementacao,pontos_teste,pontos_manutencao);
     }
 
     function carregaDados(){
@@ -413,6 +499,12 @@
         initNovel(800, 450);
     }
 
+    function acionaDownload(){
+        $.ajax({
+                url: "http://localhost:9000/api/getcsv",
+                type: "POST"
+         });
+    }
 
     function salvaDados(){
 
@@ -432,10 +524,13 @@
             type: "POST",
             statusCode: {
                 0: function () {
+                    acionaDownload();
                     alert("Fim de Jogo!");
                     window.location.replace("GraficoDesempenho.html");
                 },
                 200: function () {
+                    acionaDownload();
+                    alert("Fim de Jogo!");
                     window.location.replace("GraficoDesempenho.html");
                 }
             }
