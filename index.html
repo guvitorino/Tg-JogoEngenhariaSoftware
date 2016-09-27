@@ -479,10 +479,10 @@
         curso = localStorage.getItem("curso");
         email = localStorage.getItem("email");
         codprof = localStorage.getItem("codprof");
-        if (p != "") {
+        if (p != "" && p != undefined) {
             $("#cadastro").toggle();
-        alert("Vai começar");
-        initNovel(800, 450);
+            alert("Vai começar");
+            initNovel(800, 450);
         };
     }
 
