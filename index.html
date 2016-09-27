@@ -140,10 +140,13 @@
              ifStatement, "'posteste' == p ",
                 jump, "posteste",
             endIf, "",
-             ifStatement, "'pergunta5' == p ",
+            ifStatement, "'pergunta5' == p ",
                 jump, "pergunta5",
             endIf, "",
-            
+            ifStatement, "'final' == p ",
+                jump, "final",
+            endIf, "",
+
     		scene, "escritorio.jpg",
             personagem, {image: "personagem_sorrindo.png", position:upperCenter},
             narrator, "Você é um desenvolvedor que está em uma das mais novas Startups a Tortus, e será um dos responsáveis pelo desenvolvimento do sistema de uma Rotisseria, do mais novo cliente.",
@@ -431,7 +434,9 @@
             ifStatement, "novel.userVar.perg5 == 'resp3'",
                 jsCall, {fcn:contabiliza, params:[0,5,5,5,5]},            
             endIf, "",
+
             jsCall, {fcn:salvaPontos, params:[]},
+            jsCall, {fcn:salvaStatus, params:['final']},
             scene,{image: "escritorio.jpg", effect: "dissolve"},
             personagem, {image: "personagem_sorrindo.png", position:rightSide},
             chefe, {image: "chefe_feliz.png", position: leftSide},
@@ -446,6 +451,7 @@
             personagem, "Acho que esse é fim de nosso jornada juntos, mais volte sempre para desenvolvermos juntos",
             personagem, " Nós se vê por aí",
             jsCall, {fcn:salvaPontos, params:[]},
+            jsCall, {fcn:salvaStatus, params:['fim']},
             jsCall, {fcn:salvaDados, params:[]}
         ];
     }
@@ -469,19 +475,15 @@
 
     function carregaDados(){
         p = localStorage.getItem("parte");
-       /* if (p) {
-            carregaDados2();
-        };*/
-    }
-
-    function carregaDados2(){
         nome = localStorage.getItem("nome");
         curso = localStorage.getItem("curso");
         email = localStorage.getItem("email");
         codprof = localStorage.getItem("codprof");
-        $("#cadastro").toggle();
+        if (p != "") {
+            $("#cadastro").toggle();
         alert("Vai começar");
         initNovel(800, 450);
+        };
     }
 
     function enviar(){
@@ -551,7 +553,7 @@
     // ]]>
     </script>
 </head>
-<body onload="carregaDados();" onUnload="saveData();" style="background-color:#C4C0C3">
+<body onload="carregaDados();" style="background-color:#C4C0C3">
     <script src="js/bootstrap.min.js"></script><br><br>
     <div class"container-fluid">
         <div class="row">
